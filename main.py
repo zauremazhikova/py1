@@ -20,7 +20,13 @@ def get_info_from_url(url):
         }
 
 
-@app.get("/")
+@app.get('/')
+def read_root(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
+
+
+@app.get('/quote')
 def read_root(request: Request):
     smart_word = get_info_from_url(const_url)
-    return templates.TemplateResponse("index.html", {"request": request, "author": smart_word["author"], "content": smart_word["content"]})
+    return templates.TemplateResponse("info.html", {"request": request, "author": smart_word["author"], "content": smart_word["content"]})
+
